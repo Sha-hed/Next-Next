@@ -1,5 +1,6 @@
 import { ConnectDB } from "@/lib/ConnetDB";
 import { services } from "@/lib/services";
+import { NextResponse } from "next/server";
 
 export const POST = async () => {
   const db = await ConnectDB();
@@ -7,9 +8,9 @@ export const POST = async () => {
   try {
     await servicesCollection.deleteMany();
     const result = await servicesCollection.insertMany(services);
-    return Response.json({ message: "Services Added the database", result });
+    return NextResponse.json({ message: "Services Added the database", result });
   } catch (error) {
     console.log(error.message);
-    return Response.json({ message: "Something Went Wrong Adding Services" });
+    return NextResponse.json({ message: "Something Went Wrong Adding Services" });
   }
 };

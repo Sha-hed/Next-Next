@@ -1,5 +1,6 @@
 import { ConnectDB } from "@/lib/ConnetDB";
 import { ObjectId } from "mongodb";
+import { NextResponse } from "next/server";
 
 export const DELETE = async (request, { params }) => {
   const db = await ConnectDB();
@@ -9,9 +10,9 @@ export const DELETE = async (request, { params }) => {
       _id: params.id,
     });
     // console.log("Result Print kortesi", result);
-    return Response.json({ message: "Booking Deleted Successfully", result });
+    return NextResponse.json({ message: "Booking Deleted Successfully", result });
   } catch (error) {
-    return Response.json({ message: "Something Went Wrong While Deleting" });
+    return NextResponse.json({ message: "Something Went Wrong While Deleting" });
   }
 };
 
@@ -26,8 +27,8 @@ export const PATCH = async (request, { params }) => {
       { $set: { ...doc } },
       { upsert: true }
     );
-    return Response.json({ message: "Updated Successfully", result });
+    return NextResponse.json({ message: "Updated Successfully", result });
   } catch (error) {
-    return Response.json({ message: "Something Went Wrong While Updating" });
+    return NextResponse.json({ message: "Something Went Wrong While Updating" });
   }
 };
